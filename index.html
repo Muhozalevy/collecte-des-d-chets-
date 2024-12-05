@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Service</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+    apiKey: "AIzaSyBtlpkiw1DWoC6AM8gimSUkIBf4l-ErAXM",
+    authDomain: "collecte-des-dechets-2faf1.firebaseapp.com",
+    databaseURL: "https://collecte-des-dechets-2faf1-default-rtdb.firebaseio.com",
+    projectId: "collecte-des-dechets-2faf1",
+    storageBucket: "collecte-des-dechets-2faf1.firebasestorage.app",
+    messagingSenderId: "94475525245",
+    appId: "1:94475525245:web:9258ba6225b1bfdb01e514",
+    measurementId: "G-ZF73VNDVVV"
+  };
+
+        // Initialiser Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Exporter db pour l'utiliser dans contact.js
+        window.db = db;
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .sugge {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .tp {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            padding: 10px;
+            color: #555;
+        }
+        td {
+            padding: 10px;
+        }
+        input[type="text"],
+        select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        .max {
+            max-width: 300px;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+            input[type="submit"],
+            input[type="reset"] {
+                width: 100%;
+            }
+        }
+    </style>
+     <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+
+
+<h1>Si vous voulez faire des commandes, complétez le formulaire ici</h1>
+<div class="payment-container">
+    <h1>Paiement du tracteur</h1>
+    <p>Effectuez un paiement rapide et sécurisé en quelques clics.</p>
+    <button id="checkout">Procéder au paiement</button>
+</div>
+    <script>
+        
+        var stripe = Stripe("pk_test_51QSHYOBVnnT4RdHN1UJkBZXRVCC9sEmGAW4oCvq3cDLMtMz7r5HV73PjwoZDzHeyqh8OTyw69S3sRMvk3NCcNX9R00ual0JsLZ");
+
+        document.getElementById("checkout").addEventListener("click", function () {
+            console.log("hhhhhhhhhh");
+            stripe.redirectToCheckout({
+                lineItems: [
+                    {
+                        price: "price_1QSIFjBVnnT4RdHNXYYYeOcQ",
+                        quantity: 1
+                    },
+                ],
+                mode: "subscription",
+                successUrl: "https://www.google.com",
+                cancelUrl: "https://www.stripe.com/"
+            }).then(function (result) {
+                alert(result.error ? result.error.message : "Redirection réussie !");
+            });
+        });
+    </script>
+<div class="sugge">
+    <form id="demande">
+        <table class="tp">
+            <tr>
+                <th>Service que vous voulez</th>
+                <td>
+                    <select name="service" id="name" required>
+                        <option value="" label="Choisir ici"></option>
+                        <option value="Dechets menagers">Déchets ménagers</option>
+                        <option value="Dechets organique">Déchets organique</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><p></p></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td><input type="text" id="nom" name="Nom" size="30" required /></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td class="max"><input type="text" id="email" name="email" size="30" required /></td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td class="max"><input type="text" id="telephone" name="Telephone" size="30" required /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" id="submit" value="Valider" />
+                    <input type="reset" value="Annuler" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script type="module" src="./script.js"></script>
+</body>
+</html>
