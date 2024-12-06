@@ -102,15 +102,14 @@
 </head>
 <body>
 
-
-
-<h1>Si vous voulez faire des commandes, complétez le formulaire ici</h1>
-<div class="payment-container">
+<section id="comment-form">
+  <div class="payment-container">
     <h1>Paiement du tracteur</h1>
     <p>Effectuez un paiement rapide et sécurisé en quelques clics.</p>
     <button id="checkout">Procéder au paiement</button>
-</div>
-    <script>
+    <a href="sms.html"> Envoyer un message</a>
+   </div>
+     <script>
         
         var stripe = Stripe("pk_test_51QSHYOBVnnT4RdHN1UJkBZXRVCC9sEmGAW4oCvq3cDLMtMz7r5HV73PjwoZDzHeyqh8OTyw69S3sRMvk3NCcNX9R00ual0JsLZ");
 
@@ -130,20 +129,11 @@
                 alert(result.error ? result.error.message : "Redirection réussie !");
             });
         });
-    </script>
-<div class="sugge">
+      </script>
+    <div class="sugge">
     <form id="demande">
         <table class="tp">
-            <tr>
-                <th>Service que vous voulez</th>
-                <td>
-                    <select name="service" id="name" required>
-                        <option value="" label="Choisir ici"></option>
-                        <option value="Dechets menagers">Déchets ménagers</option>
-                        <option value="Dechets organique">Déchets organique</option>
-                    </select>
-                </td>
-            </tr>
+         
             <tr>
                 <td colspan="2"><p></p></td>
             </tr>
@@ -167,8 +157,13 @@
             </tr>
         </table>
     </form>
+   
 </div>
-
+<footer>
+<a href="https://wa.me/+25776333086">Whatsapp</a>
+<h1><img src="default.jpg" id="imgURL"></h1>
+        <p id="temp"></p>
 <script type="module" src="./script.js"></script>
+</footer>
 </body>
 </html>
